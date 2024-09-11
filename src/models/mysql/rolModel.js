@@ -1,6 +1,6 @@
 // importar la conexion a la base de datos
 import {createConnection} from '../../config/db.js'
-//
+
 
 export class Rol {
     constructor(idRol, nombreRol){
