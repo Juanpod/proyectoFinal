@@ -1,0 +1,17 @@
+{
+  "name": "servidor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start:mysql": "node --watch src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "4.19.2",
+    "mysql2": "3.11.0"
+  }
+}
