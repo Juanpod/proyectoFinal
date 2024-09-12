@@ -6,8 +6,9 @@ import { tipoComentarioRouter } from "./routes/tipoComentarioRoutes.js"
 import { categoriaRouter } from "./routes/categoriaRoutes.js"
 import { prioridadRouter } from "./routes/prioridadRoutes.js"
 import { estadoTicketRouter } from "./routes/estadoTicketRoutes.js"
-
-
+import { sucursalRouter } from "./routes/sucursalRoutes.js"
+import { usuarioRouter } from "./routes/usuarioRoutes.js"
+import { equipoRouter } from "./routes/equipoRoutes.js"
 
 
 
@@ -19,6 +20,11 @@ app.use('/tipoComentario', tipoComentarioRouter)
 app.use('/categoria', categoriaRouter)
 app.use('/prioridad', prioridadRouter)
 app.use('/estadoTicket', estadoTicketRouter)
+app.use('/sucursal', sucursalRouter)
+app.use('/usuario', usuarioRouter)
+app.use('/equipo', equipoRouter)
+
+
 
 
 
