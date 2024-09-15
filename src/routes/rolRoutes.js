@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { RolController } from "../controllers/rolController.js";
-
+import { authenticate } from "../middlewares/authenticate.js";
 export const rolRouter = Router();
+rolRouter.use(authenticate);
 
 rolRouter.get("/", RolController.getAll);
 rolRouter.get("/:idRol", RolController.getById);

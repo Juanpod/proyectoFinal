@@ -1,7 +1,10 @@
 import { ComunaController } from "../controllers/comunaController.js";
 import { Router } from "express";
+import { authenticate } from "../middlewares/authenticate.js";
 
 export const comunaRouter = Router();
+
+comunaRouter.use(authenticate);
 
 comunaRouter.get("/", ComunaController.getAll);
 comunaRouter.get("/:idComuna", ComunaController.getById);

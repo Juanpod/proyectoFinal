@@ -11,6 +11,7 @@ import { usuarioRouter } from "./routes/usuarioRoutes.js";
 import { equipoRouter } from "./routes/equipoRoutes.js";
 import { ticketRouter } from "./routes/ticketRoutes.js";
 import { comentarioRouter } from "./routes/comentarioRoutes.js";
+import { loginRouter } from "./routes/loginRoutes.js";
 
 //Rutas
 app.use("/rol", rolRouter);
@@ -25,6 +26,7 @@ app.use("/usuario", usuarioRouter);
 app.use("/equipo", equipoRouter);
 app.use("/ticket", ticketRouter);
 app.use("/comentario", comentarioRouter);
+app.use("/login", loginRouter);
 
 app.use((err, req, res, next) => {
     console.error(err.message); // Log del error en el servidor

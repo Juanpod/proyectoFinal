@@ -3,6 +3,8 @@ import bcrypt from "bcrypt";
 
 export class UsuarioController {
     static async getAll(req, res, next) {
+        console.log("Controller req.user", req.user);
+        //Aca agregar condicion para que verifique si el rol de usuario es administrador
         try {
             const results = await Usuario.getAll();
             res.status(200).json({
