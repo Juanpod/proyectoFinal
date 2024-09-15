@@ -6,7 +6,7 @@ export class EquipoController {
             const results = await Equipo.getAll();
             res.status(200).json({
                 success: true,
-                data: results
+                data: results,
             });
         } catch (error) {
             next(error);
@@ -15,11 +15,11 @@ export class EquipoController {
 
     static async getById(req, res, next) {
         const { idEquipo } = req.params;
-        console.log(idEquipo)
+        console.log(idEquipo);
         if (!idEquipo || isNaN(idEquipo)) {
             return res.status(400).json({
                 success: false,
-                message: "El ID proporcionado no es válido."
+                message: "El ID proporcionado no es válido.",
             });
         }
 
@@ -29,87 +29,125 @@ export class EquipoController {
             if (!result) {
                 return res.status(404).json({
                     success: false,
-                    message: `No se encontraron datos para el id=${idEquipo}.`
+                    message: `No se encontraron datos para el id=${idEquipo}.`,
                 });
             }
 
             res.status(200).json({
                 success: true,
-                data: result
+                data: result,
             });
         } catch (error) {
             next(error);
         }
     }
 
-    static async create(req, res, next){
-        const {nombreEquipo, modeloEquipo, ipEquipo, idUsuario, idTipoEquipo } = req.body;
-        console.log(idUsuario, isNaN(idUsuario))
-        if (!nombreEquipo || !modeloEquipo || !idTipoEquipo || isNaN(idTipoEquipo)) {
+    static async create(req, res, next) {
+        const {
+            nombreEquipo,
+            modeloEquipo,
+            ipEquipo,
+            idUsuario,
+            idTipoEquipo,
+        } = req.body;
+        console.log(idUsuario, isNaN(idUsuario));
+        if (
+            !nombreEquipo ||
+            !modeloEquipo ||
+            !idTipoEquipo ||
+            isNaN(idTipoEquipo)
+        ) {
             return res.status(400).json({
                 success: false,
-                message: "Todos los campos son obligatorios y deben ser válidos."
+                message:
+                    "Todos los campos son obligatorios y deben ser válidos.",
             });
         }
 
         try {
-      
-            const newEquipo = await Equipo.create(nombreEquipo, modeloEquipo, ipEquipo, idUsuario, idTipoEquipo);
-        
+            const newEquipo = await Equipo.create(
+                nombreEquipo,
+                modeloEquipo,
+                ipEquipo,
+                idUsuario,
+                idTipoEquipo
+            );
+
             res.status(201).json({
                 success: true,
-                data: newEquipo
+                data: newEquipo,
             });
         } catch (error) {
             next(error);
         }
     }
 
-    static async update(req, res, next){
+    static async update(req, res, next) {
         const { idEquipo } = req.params;
-        const {nombreEquipo, modeloEquipo, ipEquipo, idUsuario, idTipoEquipo } = req.body;
+        const {
+            nombreEquipo,
+            modeloEquipo,
+            ipEquipo,
+            idUsuario,
+            idTipoEquipo,
+        } = req.body;
 
         if (!idEquipo || isNaN(idEquipo)) {
             return res.status(400).json({
                 success: false,
-                message: "El ID proporcionado no es válido."
+                message: "El ID proporcionado no es válido.",
             });
         }
 
-        if (!nombreEquipo || !modeloEquipo || !idUsuario || !idTipoEquipo || isNaN(idEquipo) || isNaN(idTipoEquipo)) {
+        if (
+            !nombreEquipo ||
+            !modeloEquipo ||
+            !idUsuario ||
+            !idTipoEquipo ||
+            isNaN(idEquipo) ||
+            isNaN(idTipoEquipo)
+        ) {
             return res.status(400).json({
                 success: false,
-                message: "Todos los campos son obligatorios y deben ser válidos."
+                message:
+                    "Todos los campos son obligatorios y deben ser válidos.",
             });
         }
 
         try {
-            const updatedEquipo = await Equipo.update(idEquipo, nombreEquipo, modeloEquipo, ipEquipo, idUsuario, idTipoEquipo);
+            const updatedEquipo = await Equipo.update(
+                idEquipo,
+                nombreEquipo,
+                modeloEquipo,
+                ipEquipo,
+                idUsuario,
+                idTipoEquipo
+            );
 
             if (!updatedEquipo) {
                 return res.status(404).json({
                     success: false,
-                    message: `No se pudo actualizar, equipo con id=${idEquipo} no encontrado.`
+                    message: `No se pudo actualizar, equipo con id=${idEquipo} no encontrado.`,
                 });
             }
 
             res.status(200).json({
                 success: true,
                 message: "Equipo actualizado exitosamente.",
-                data: updatedEquipo
+                data: updatedEquipo,
             });
         } catch (error) {
             next(error);
         }
     }
 
-    static async delete(req, res, next){
+    static async delete(req, res, next) {
         const { idEquipo } = req.params;
 
         if (!idEquipo || isNaN(idEquipo)) {
             return res.status(400).json({
                 success: false,
-                message: "El ID es inválido."
+                message: "El ID es inválido.",
             });
         }
 
@@ -119,7 +157,7 @@ export class EquipoController {
             if (!deletedId) {
                 return res.status(404).json({
                     success: false,
-                    message: `No se encontró el equipo para el id=${idEquipo}.`
+                    message: `No se encontró el equipo para el id=${idEquipo}.`,
                 });
             }
 
@@ -131,5 +169,4 @@ export class EquipoController {
             next(error);
         }
     }
-
 }

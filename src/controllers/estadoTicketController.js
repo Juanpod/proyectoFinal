@@ -6,7 +6,7 @@ export class EstadoTicketController {
             const results = await EstadoTicket.getAll();
             res.status(200).json({
                 success: true,
-                data: results
+                data: results,
             });
         } catch (error) {
             next(error);
@@ -19,7 +19,7 @@ export class EstadoTicketController {
         if (!idEstadoTicket || isNaN(idEstadoTicket)) {
             return res.status(400).json({
                 success: false,
-                message: "El ID es inválido."
+                message: "El ID es inválido.",
             });
         }
 
@@ -29,13 +29,13 @@ export class EstadoTicketController {
             if (!result) {
                 return res.status(404).json({
                     success: false,
-                    message: `No se encontró el estado para el id=${idEstadoTicket}.`
+                    message: `No se encontró el estado para el id=${idEstadoTicket}.`,
                 });
             }
 
             res.status(200).json({
                 success: true,
-                data: result
+                data: result,
             });
         } catch (error) {
             next(error);
@@ -48,7 +48,7 @@ export class EstadoTicketController {
         if (!estadoTicket || estadoTicket.trim() === "") {
             return res.status(400).json({
                 success: false,
-                message: "El nombre del estado es obligatorio."
+                message: "El nombre del estado es obligatorio.",
             });
         }
 
@@ -56,13 +56,13 @@ export class EstadoTicketController {
             const newEntry = await EstadoTicket.create(estadoTicket);
             res.status(201).json({
                 success: true,
-                data: newEntry
+                data: newEntry,
             });
         } catch (error) {
             if (error.message === "El estado ya existe.") {
                 return res.status(409).json({
                     success: false,
-                    message: "El estado ya existe."
+                    message: "El estado ya existe.",
                 });
             }
             next(error);
@@ -76,36 +76,39 @@ export class EstadoTicketController {
         if (!idEstadoTicket || isNaN(idEstadoTicket)) {
             return res.status(400).json({
                 success: false,
-                message: "El ID es inválido."
+                message: "El ID es inválido.",
             });
         }
 
         if (!estadoTicket || estadoTicket.trim() === "") {
             return res.status(400).json({
                 success: false,
-                message: "El nombre del estado es obligatorio."
+                message: "El nombre del estado es obligatorio.",
             });
         }
 
         try {
-            const updatedEntry = await EstadoTicket.update(idEstadoTicket, estadoTicket);
+            const updatedEntry = await EstadoTicket.update(
+                idEstadoTicket,
+                estadoTicket
+            );
 
             if (!updatedEntry) {
                 return res.status(404).json({
                     success: false,
-                    message: `No se encontró el estado para el id=${idEstadoTicket}.`
+                    message: `No se encontró el estado para el id=${idEstadoTicket}.`,
                 });
             }
 
             res.status(200).json({
                 success: true,
-                data: updatedEntry
+                data: updatedEntry,
             });
         } catch (error) {
             if (error.message === "El estado ya existe.") {
                 return res.status(409).json({
                     success: false,
-                    message: "El estado ya existe."
+                    message: "El estado ya existe.",
                 });
             }
             next(error);
@@ -118,7 +121,7 @@ export class EstadoTicketController {
         if (!idEstadoTicket || isNaN(idEstadoTicket)) {
             return res.status(400).json({
                 success: false,
-                message: "El ID es inválido."
+                message: "El ID es inválido.",
             });
         }
 
@@ -128,7 +131,7 @@ export class EstadoTicketController {
             if (!deletedId) {
                 return res.status(404).json({
                     success: false,
-                    message: `No se encontró el estado para el id=${idEstadoTicket}.`
+                    message: `No se encontró el estado para el id=${idEstadoTicket}.`,
                 });
             }
 

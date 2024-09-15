@@ -1,11 +1,10 @@
+import { Router } from "express";
+import { EquipoController } from "../controllers/equipoController.js";
 
-import { Router } from "express"
-import { EquipoController } from "../controllers/equipoController.js"
+export const equipoRouter = Router();
 
-export const equipoRouter = Router()
-
-equipoRouter.get('/', EquipoController.getAll)
-equipoRouter.get('/:idEquipo', EquipoController.getById)
-equipoRouter.post('/', EquipoController.create)
-equipoRouter.put('/:idEquipo', EquipoController.update)
-equipoRouter.delete('/:idEquipo', EquipoController.delete)
+equipoRouter.get("/", EquipoController.getAll);
+equipoRouter.get("/:idEquipo", EquipoController.getById);
+equipoRouter.post("/", EquipoController.create);
+equipoRouter.put("/:idEquipo", EquipoController.update);
+equipoRouter.delete("/:idEquipo", EquipoController.delete);

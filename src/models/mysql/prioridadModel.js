@@ -1,4 +1,4 @@
-import { createConnection } from '../../config/db.js';
+import { createConnection } from "../../config/db.js";
 
 export class Prioridad {
     constructor(idPrioridad, nombrePrioridad) {
@@ -7,7 +7,7 @@ export class Prioridad {
     }
 
     static async getAll() {
-        const query = 'SELECT idPrioridad, nombrePrioridad FROM Prioridades;';
+        const query = "SELECT idPrioridad, nombrePrioridad FROM Prioridades;";
         let connection;
         try {
             connection = await createConnection();
@@ -30,18 +30,25 @@ export class Prioridad {
     }
 
     static async getById(idPrioridad) {
-        const query = 'SELECT idPrioridad, nombrePrioridad FROM Prioridades WHERE idPrioridad = ?;';
+        const query =
+            "SELECT idPrioridad, nombrePrioridad FROM Prioridades WHERE idPrioridad = ?;";
         let connection;
         try {
             connection = await createConnection();
             const [result] = await connection.query(query, [idPrioridad]);
             if (result.length === 0) {
-                console.log("Model: No se encontraron datos para el id =", idPrioridad);
+                console.log(
+                    "Model: No se encontraron datos para el id =",
+                    idPrioridad
+                );
                 return null;
             }
             return result[0];
         } catch (error) {
-            console.error("Error al obtener la prioridad para el id", idPrioridad);
+            console.error(
+                "Error al obtener la prioridad para el id",
+                idPrioridad
+            );
             throw new Error("Error en la base de datos.");
         } finally {
             if (connection) {
@@ -52,13 +59,16 @@ export class Prioridad {
     }
 
     static async create(nombrePrioridad) {
-        const query = 'INSERT INTO Prioridades (nombrePrioridad) VALUES (?);';
-        const searchQuery = 'SELECT * FROM Prioridades WHERE nombrePrioridad = ?;';
+        const query = "INSERT INTO Prioridades (nombrePrioridad) VALUES (?);";
+        const searchQuery =
+            "SELECT * FROM Prioridades WHERE nombrePrioridad = ?;";
         let connection;
 
         try {
             connection = await createConnection();
-            const [searchResults] = await connection.query(searchQuery, [nombrePrioridad]);
+            const [searchResults] = await connection.query(searchQuery, [
+                nombrePrioridad,
+            ]);
 
             if (searchResults.length > 0) {
                 console.log("Model: La prioridad ya existe.");
@@ -81,21 +91,29 @@ export class Prioridad {
     }
 
     static async update(idPrioridad, nombrePrioridad) {
-        const query = 'UPDATE Prioridades SET nombrePrioridad = ? WHERE idPrioridad = ?;';
-        const searchQuery = 'SELECT * FROM Prioridades WHERE nombrePrioridad = ? AND idPrioridad != ?;';
+        const query =
+            "UPDATE Prioridades SET nombrePrioridad = ? WHERE idPrioridad = ?;";
+        const searchQuery =
+            "SELECT * FROM Prioridades WHERE nombrePrioridad = ? AND idPrioridad != ?;";
         let connection;
 
         try {
             connection = await createConnection();
 
-            const [searchResult] = await connection.query(searchQuery, [nombrePrioridad, idPrioridad]);
+            const [searchResult] = await connection.query(searchQuery, [
+                nombrePrioridad,
+                idPrioridad,
+            ]);
 
             if (searchResult.length > 0) {
                 console.log("Model: La prioridad ya existe.");
                 throw new Error("La prioridad ya existe.");
             }
 
-            const [result] = await connection.query(query, [nombrePrioridad, idPrioridad]);
+            const [result] = await connection.query(query, [
+                nombrePrioridad,
+                idPrioridad,
+            ]);
 
             if (result.affectedRows === 0) {
                 return null;
@@ -103,7 +121,6 @@ export class Prioridad {
 
             const updatedEntry = await this.getById(idPrioridad);
             return updatedEntry;
-
         } catch (error) {
             console.error("Error al actualizar la prioridad.");
             throw new Error(error.message || "Error en la base de datos.");
@@ -116,7 +133,7 @@ export class Prioridad {
     }
 
     static async delete(idPrioridad) {
-        const query = 'DELETE FROM Prioridades WHERE idPrioridad = ?;';
+        const query = "DELETE FROM Prioridades WHERE idPrioridad = ?;";
         let connection;
 
         try {
