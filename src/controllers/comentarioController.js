@@ -1,22 +1,23 @@
-import { Equipo } from "../models/mysql/equipoModel.js";
+import { Comentario } from "../models/mysql/comentarioModel.js";
 
-export class EquipoController {
-    static async getAll(req, res, next) {
+
+export class ComentarioController{
+    static async getAll(req, res, next){
         try {
-            const results = await Equipo.getAll();
+            const comentarios = await Comentario.getAll();
             res.status(200).json({
-                success: true,
-                data: results
-            });
+                succes: true,
+                data: comentarios
+            })
         } catch (error) {
-            next(error);
+            next(error)
         }
     }
 
-    static async getById(req, res, next) {
-        const { idEquipo } = req.params;
-        console.log(idEquipo)
-        if (!idEquipo || isNaN(idEquipo)) {
+    static async getById(req, res, next){
+        const { idComentario } = req.params;
+
+        if (!idComentario || isNaN(idComentario)) {
             return res.status(400).json({
                 success: false,
                 message: "El ID proporcionado no es válido."
@@ -24,12 +25,12 @@ export class EquipoController {
         }
 
         try {
-            const result = await Equipo.getById(idEquipo);
-
+            const result = await Comentario.getById(idComentario);
+            console.log(result)
             if (!result) {
                 return res.status(404).json({
                     success: false,
-                    message: `No se encontraron datos para el id=${idEquipo}.`
+                    message: `No se encontraron datos para el id=${idComentario}.`
                 });
             }
 
@@ -41,11 +42,10 @@ export class EquipoController {
             next(error);
         }
     }
-
     static async create(req, res, next){
-        const {nombreEquipo, modeloEquipo, ipEquipo, idUsuario, idTipoEquipo } = req.body;
-        console.log(idUsuario, isNaN(idUsuario))
-        if (!nombreEquipo || !modeloEquipo || !idTipoEquipo || isNaN(idTipoEquipo)) {
+        const { comentario, idTipoComentario, idTicket } = req.body;
+
+        if (!comentario || !idTipoComentario || !idTicket || isNaN(idTipoComentario) || isNaN(idTicket)) {
             return res.status(400).json({
                 success: false,
                 message: "Todos los campos son obligatorios y deben ser válidos."
@@ -54,29 +54,28 @@ export class EquipoController {
 
         try {
       
-            const newEquipo = await Equipo.create(nombreEquipo, modeloEquipo, ipEquipo, idUsuario, idTipoEquipo);
+            const newComment = await Comentario.create(comentario, idTipoComentario, idTicket);
         
             res.status(201).json({
                 success: true,
-                data: newEquipo
+                data: newComment
             });
         } catch (error) {
             next(error);
         }
     }
-
     static async update(req, res, next){
-        const { idEquipo } = req.params;
-        const {nombreEquipo, modeloEquipo, ipEquipo, idUsuario, idTipoEquipo } = req.body;
+        const { idComentario } = req.params;
+        const { comentario, idTipoComentario, idTicket} = req.body;
 
-        if (!idEquipo || isNaN(idEquipo)) {
+        if (!idComentario || isNaN(idComentario)) {
             return res.status(400).json({
                 success: false,
                 message: "El ID proporcionado no es válido."
             });
         }
 
-        if (!nombreEquipo || !modeloEquipo || !idUsuario || !idTipoEquipo || isNaN(idEquipo) || isNaN(idTipoEquipo)) {
+        if (!comentario || !idTipoComentario || !idTicket || isNaN(idTipoComentario) || isNaN(idTicket)) {
             return res.status(400).json({
                 success: false,
                 message: "Todos los campos son obligatorios y deben ser válidos."
@@ -84,52 +83,50 @@ export class EquipoController {
         }
 
         try {
-            const updatedEquipo = await Equipo.update(idEquipo, nombreEquipo, modeloEquipo, ipEquipo, idUsuario, idTipoEquipo);
+            const updatedComment = await Comentario.update(idComentario, comentario, idTipoComentario, idTicket);
 
-            if (!updatedEquipo) {
+            if (!updatedComment) {
                 return res.status(404).json({
                     success: false,
-                    message: `No se pudo actualizar, equipo con id=${idEquipo} no encontrado.`
+                    message: `No se pudo actualizar, comentario con id=${idComentario} no encontrado.`
                 });
             }
 
             res.status(200).json({
                 success: true,
-                message: "Equipo actualizado exitosamente.",
-                data: updatedEquipo
+                message: "Comentario actualizado exitosamente.",
+                data: updatedComment
             });
         } catch (error) {
             next(error);
         }
     }
-
     static async delete(req, res, next){
-        const { idEquipo } = req.params;
+        const { idComentario } = req.params;
 
-        if (!idEquipo || isNaN(idEquipo)) {
+        if (!idComentario || isNaN(idComentario)) {
             return res.status(400).json({
                 success: false,
-                message: "El ID es inválido."
+                message: "El ID proporcionado no es válido."
             });
         }
 
         try {
-            const deletedId = await Equipo.delete(idEquipo);
+            const deletedComment = await Comentario.delete(idComentario);
 
-            if (!deletedId) {
+            if (!deletedComment) {
                 return res.status(404).json({
                     success: false,
-                    message: `No se encontró el equipo para el id=${idEquipo}.`
+                    message: `No se pudo eliminar, ticket con id=${idComentario} no encontrado.`
                 });
             }
 
             res.status(200).json({
                 success: true,
-                message: `Equipo con id ${idEquipo} eliminado exitosamente.`,
+                message: `Comentario con id=${idComentario} eliminado exitosamente.`
             });
         } catch (error) {
             next(error);
         }
     }
-
 }

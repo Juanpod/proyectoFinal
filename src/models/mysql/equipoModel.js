@@ -62,11 +62,15 @@ export class Equipo {
         try {
             connection = await createConnection();
 
-            // Verificar si el idUsuario existe
-            const usuarioExists = await this.usuarioExists(idUsuario);
-            if (!usuarioExists) {
+            if(idUsuario){
+                // Verificar si el idUsuario existe
+                const usuarioExists = await this.usuarioExists(idUsuario);
+                if (!usuarioExists) {
                 throw new Error("El idUsuario no es válido.");
             }
+            }
+            
+            
 
             // Verificar si el idTipoEquipo existe
             const tipoEquipoExists = await this.tipoEquipoExists(idTipoEquipo);

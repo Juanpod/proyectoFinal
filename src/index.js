@@ -9,6 +9,8 @@ import { estadoTicketRouter } from "./routes/estadoTicketRoutes.js"
 import { sucursalRouter } from "./routes/sucursalRoutes.js"
 import { usuarioRouter } from "./routes/usuarioRoutes.js"
 import { equipoRouter } from "./routes/equipoRoutes.js"
+import { ticketRouter } from "./routes/ticketRoutes.js"
+import { comentarioRouter } from "./routes/comentarioRoutes.js"
 
 
 
@@ -23,6 +25,8 @@ app.use('/estadoTicket', estadoTicketRouter)
 app.use('/sucursal', sucursalRouter)
 app.use('/usuario', usuarioRouter)
 app.use('/equipo', equipoRouter)
+app.use('/ticket', ticketRouter)
+app.use('/comentario', comentarioRouter)
 
 
 

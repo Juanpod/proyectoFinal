@@ -1,4 +1,5 @@
 import { Usuario } from "../models/mysql/usuarioModel.js";
+import bcrypt from 'bcrypt'
 
 export class UsuarioController {
     static async getAll(req, res, next) {
@@ -16,11 +17,12 @@ export class UsuarioController {
     static async getById(req, res, next) {
         const { idUsuario } = req.params;
 
+        
         if (!idUsuario || isNaN(idUsuario)) {
             return res.status(400).json({
                 success: false,
                 message: "El ID proporcionado no es válido."
-            });
+            })
         }
 
         try {
@@ -51,17 +53,22 @@ export class UsuarioController {
                 message: "Todos los campos son obligatorios y deben ser válidos."
             });
         }
-
+        
+        
+        
         try {
-      
-            const newUser = await Usuario.create(nombre, email, password, rut, idRol, idSucursal, telefonoContacto);
+            
+            const saltRounds = 10
+            const hashedPassword = await bcrypt.hash(password, saltRounds)
+            
+            const newUser = await Usuario.create(nombre, email, hashedPassword, rut, idRol, idSucursal, telefonoContacto)
         
             res.status(201).json({
                 success: true,
                 data: newUser
-            });
+            })
         } catch (error) {
-            next(error);
+            next(error)
         }
     }
     
