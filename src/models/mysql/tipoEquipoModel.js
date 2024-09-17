@@ -7,7 +7,8 @@ export class TipoEquipo {
     }
 
     static async getAll() {
-        const query = "SELECT idTipoEquipo, tipoEquipo FROM TiposEquipos;";
+        const query =
+            "SELECT idTipoEquipo, tipoEquipo FROM TiposEquipos ORDER BY idTipoEquipo DESC";
         let connection;
         try {
             connection = await createConnection();

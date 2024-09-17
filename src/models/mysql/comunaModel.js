@@ -7,7 +7,8 @@ export class Comuna {
     }
 
     static async getAll() {
-        const query = "SELECT idComuna, nombreComuna FROM Comunas;";
+        const query =
+            "SELECT idComuna, nombreComuna FROM Comunas ORDER BY idComuna DESC;";
         let connection;
         try {
             connection = await createConnection();

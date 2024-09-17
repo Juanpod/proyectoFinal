@@ -8,7 +8,7 @@ export class TipoComentario {
 
     static async getAll() {
         const query =
-            "SELECT idTipoComentario, tipoComentario FROM TiposComentarios;";
+            "SELECT idTipoComentario, tipoComentario FROM TiposComentarios ORDER BY idTipoComentario DESC;";
         let connection;
         try {
             connection = await createConnection();

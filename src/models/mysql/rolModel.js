@@ -8,7 +8,7 @@ export class Rol {
     }
 
     static async getAll() {
-        const query = "SELECT idRol, nombreRol FROM Roles;"; // Se define la query para obtener todos los nombres de roles
+        const query = "SELECT idRol, nombreRol FROM Roles ORDER BY idRol DESC;"; // Se define la query para obtener todos los nombres de roles
         let connection;
 
         try {

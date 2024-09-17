@@ -8,7 +8,7 @@ export class EstadoTicket {
 
     static async getAll() {
         const query =
-            "SELECT idEstadoTicket, estadoTicket FROM EstadosTickets;";
+            "SELECT idEstadoTicket, estadoTicket FROM EstadosTickets ORDER BY idEstadoTicket DESC;";
         let connection;
         try {
             connection = await createConnection();

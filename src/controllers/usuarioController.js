@@ -132,11 +132,14 @@ export class UsuarioController {
         }
 
         try {
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(password, saltRounds);
+
             const updatedUser = await Usuario.update(
                 idUsuario,
                 nombre,
                 email,
-                password,
+                hashedPassword,
                 rut,
                 idRol,
                 idSucursal,

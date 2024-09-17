@@ -19,7 +19,7 @@ export const authenticate = (req, res, next) => {
     } catch (error) {
         return res.status(401).json({
             success: false,
-            message: "Token Invalido",
+            message: "Autenthicate: Token Invalido",
         });
     }
 };

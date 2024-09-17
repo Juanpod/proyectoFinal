@@ -7,7 +7,8 @@ export class Prioridad {
     }
 
     static async getAll() {
-        const query = "SELECT idPrioridad, nombrePrioridad FROM Prioridades;";
+        const query =
+            "SELECT idPrioridad, nombrePrioridad FROM Prioridades ORDER BY idPrioridad DESC;";
         let connection;
         try {
             connection = await createConnection();

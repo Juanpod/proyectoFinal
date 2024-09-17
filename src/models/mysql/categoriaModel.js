@@ -7,7 +7,8 @@ export class Categoria {
     }
 
     static async getAll() {
-        const query = "SELECT idCategoria, nombreCategoria FROM Categorias;";
+        const query =
+            "SELECT idCategoria, nombreCategoria FROM Categorias ORDER BY idCategoria DESC;";
         let connection;
         try {
             connection = await createConnection();
