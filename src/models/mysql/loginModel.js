@@ -10,7 +10,7 @@ export class Login {
 
     static async login(email, password) {
         const query =
-            "SELECT idUsuario, idRol, password FROM Usuarios WHERE email = ?";
+            "SELECT idUsuario, nombre, idRol, password FROM Usuarios WHERE email = ?";
         console.log("Model:", email);
         let connection;
         try {
@@ -35,6 +35,7 @@ export class Login {
                 const token = jwt.sign(
                     {
                         idUsuario: results[0].idUsuario,
+                        nombre: results[0].nombre,
                         idRol: results[0].idRol,
                     },
                     "secreta",

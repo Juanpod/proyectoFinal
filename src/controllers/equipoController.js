@@ -51,6 +51,7 @@ export class EquipoController {
             idTipoEquipo,
         } = req.body;
         console.log(idUsuario, isNaN(idUsuario));
+        console.log(idTipoEquipo, isNaN(idTipoEquipo));
         if (
             !nombreEquipo ||
             !modeloEquipo ||
