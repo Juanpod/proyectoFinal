@@ -25,7 +25,7 @@ export class Ticket {
 
     static async getAll() {
         const query =
-            "SELECT idTicket, asuntoTicket, descripcionTicket, fechaCreacion, idEstadoTicket, idPrioridad, idCategoria, idUsuarioCreador, idUsuarioResolutor FROM Tickets;";
+            "SELECT idTicket, asuntoTicket, descripcionTicket, fechaCreacion, idEstadoTicket, idPrioridad, idCategoria, idUsuarioCreador, idUsuarioResolutor FROM Tickets ORDER BY idTicket DESC;";
         let connection;
         try {
             connection = await createConnection();
