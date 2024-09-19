@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { FRONTED_URL } from "./config/config.js";
 
 const app = express();
 app.disable("x-powered-by");
@@ -8,7 +9,7 @@ app.disable("x-powered-by");
 app.use(express.json());
 const corsOptions = {
     credentials: true,
-    origin: ["http://localhost:3000", "http://localhost:5173"],
+    origin: [FRONTED_URL],
 };
 
 app.use(cors(corsOptions));
